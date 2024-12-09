@@ -1,2 +1,2 @@
 Trying Rust......
-Also some of the solutions just have part two if the problems didn't differ significantly.
+To run specifica day `cargo run --bin day_number`
