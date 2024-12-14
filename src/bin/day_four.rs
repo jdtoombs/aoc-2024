@@ -1,4 +1,3 @@
-
 use std::fs;
 
 fn main() {
@@ -15,61 +14,85 @@ fn day_four() -> i32 {
         matrix.push(row);
     }
     for (row_index, row) in matrix.iter().enumerate() {
-        for(col_index, col) in row.iter().enumerate() {
+        for (col_index, col) in row.iter().enumerate() {
             if col == "X" {
                 // horizontal check
                 if position_exists(&matrix, row_index, col_index + 3) {
-                    if matrix[row_index][col_index + 1] == "M" && matrix[row_index][col_index + 2] == "A" && matrix[row_index][col_index + 3] == "S" {
+                    if matrix[row_index][col_index + 1] == "M"
+                        && matrix[row_index][col_index + 2] == "A"
+                        && matrix[row_index][col_index + 3] == "S"
+                    {
                         word_count += 1;
                     }
                 }
                 // horizontal right to left
                 if col_index >= 3 && position_exists(&matrix, row_index, col_index - 3) {
-                    if matrix[row_index][col_index - 1] == "M" && matrix[row_index][col_index - 2] == "A" && matrix[row_index][col_index - 3] == "S" {
+                    if matrix[row_index][col_index - 1] == "M"
+                        && matrix[row_index][col_index - 2] == "A"
+                        && matrix[row_index][col_index - 3] == "S"
+                    {
                         word_count += 1;
                     }
-
                 }
                 // vertical normal
                 if position_exists(&matrix, row_index + 3, col_index) {
-                    if matrix[row_index + 1][col_index] == "M" && matrix[row_index + 2][col_index] == "A" && matrix[row_index + 3][col_index] == "S" {
+                    if matrix[row_index + 1][col_index] == "M"
+                        && matrix[row_index + 2][col_index] == "A"
+                        && matrix[row_index + 3][col_index] == "S"
+                    {
                         word_count += 1;
                     }
                 }
                 // vertical reverse
                 if row_index >= 3 && position_exists(&matrix, row_index - 3, col_index) {
-                    if matrix[row_index - 1][col_index] == "M" && matrix[row_index - 2][col_index] == "A" && matrix[row_index - 3][col_index] == "S" {
+                    if matrix[row_index - 1][col_index] == "M"
+                        && matrix[row_index - 2][col_index] == "A"
+                        && matrix[row_index - 3][col_index] == "S"
+                    {
                         word_count += 1;
                     }
                 }
                 // diagnol
-                if position_exists(&matrix, row_index + 3, col_index + 3){
-                    if matrix[row_index + 1][col_index + 1] == "M" && matrix[row_index + 2][col_index + 2] == "A" && matrix[row_index + 3][col_index + 3] == "S" {
-                        word_count += 1;
-                    }
-
-                }
-                if row_index >= 3 && col_index >= 3 && position_exists(&matrix, row_index - 3, col_index - 3){
-                    if matrix[row_index - 1][col_index - 1] == "M" && matrix[row_index - 2][col_index - 2] == "A" && matrix[row_index - 3][col_index - 3] == "S" {
-                        word_count += 1;
-                    }
-
-                }
-
-                if col_index >= 3 && position_exists(&matrix, row_index + 3, col_index - 3){
-                    if matrix[row_index + 1][col_index - 1] == "M" && matrix[row_index + 2][col_index - 2] == "A" && matrix[row_index + 3][col_index - 3] == "S" {
+                if position_exists(&matrix, row_index + 3, col_index + 3) {
+                    if matrix[row_index + 1][col_index + 1] == "M"
+                        && matrix[row_index + 2][col_index + 2] == "A"
+                        && matrix[row_index + 3][col_index + 3] == "S"
+                    {
                         word_count += 1;
                     }
                 }
-                if row_index >= 3 && position_exists(&matrix, row_index - 3, col_index + 3){
-                    if matrix[row_index - 1][col_index + 1] == "M" && matrix[row_index - 2][col_index + 2] == "A" && matrix[row_index - 3][col_index + 3] == "S" {
+                if row_index >= 3
+                    && col_index >= 3
+                    && position_exists(&matrix, row_index - 3, col_index - 3)
+                {
+                    if matrix[row_index - 1][col_index - 1] == "M"
+                        && matrix[row_index - 2][col_index - 2] == "A"
+                        && matrix[row_index - 3][col_index - 3] == "S"
+                    {
+                        word_count += 1;
+                    }
+                }
+
+                if col_index >= 3 && position_exists(&matrix, row_index + 3, col_index - 3) {
+                    if matrix[row_index + 1][col_index - 1] == "M"
+                        && matrix[row_index + 2][col_index - 2] == "A"
+                        && matrix[row_index + 3][col_index - 3] == "S"
+                    {
+                        word_count += 1;
+                    }
+                }
+                if row_index >= 3 && position_exists(&matrix, row_index - 3, col_index + 3) {
+                    if matrix[row_index - 1][col_index + 1] == "M"
+                        && matrix[row_index - 2][col_index + 2] == "A"
+                        && matrix[row_index - 3][col_index + 3] == "S"
+                    {
                         word_count += 1;
                     }
                 }
             }
         }
     }
-    return word_count; 
+    return word_count;
 }
 
 // ugly but works :) idk rust
@@ -84,9 +107,14 @@ fn day_four_part_two() -> i32 {
     }
 
     // directions [(down right), (down left), (up right), (up left)]
-    let directions: [((isize, isize), (isize, isize)); 4] = [((1,1), (2,2)), ((1, -1), (2, -2)), ((-1, 1), (-2, 2)), ((-1, -1), (-2, -2))];
+    let directions: [((isize, isize), (isize, isize)); 4] = [
+        ((1, 1), (2, 2)),
+        ((1, -1), (2, -2)),
+        ((-1, 1), (-2, 2)),
+        ((-1, -1), (-2, -2)),
+    ];
     for (row_index, row) in matrix.iter().enumerate() {
-        for(col_index, col) in row.iter().enumerate() {
+        for (col_index, col) in row.iter().enumerate() {
             if col == "M" {
                 for ((x1, y1), (x2, y2)) in &directions {
                     let r1 = row_index as isize + y1;
@@ -98,73 +126,109 @@ fn day_four_part_two() -> i32 {
                         continue;
                     }
 
-                   if matrix[r1 as usize][c1 as usize] == "A" && matrix[r2 as usize][c2 as usize] == "S" {
-                       let a_pos = (r1, c1);
-                       // stop if we have been already to avoid dupes
-                       if visited_intersects.contains(&a_pos) {
-                           continue;
-                       }
-                       visited_intersects.push(a_pos);
-                       let m_pos = (row_index, col_index);
-                       let dir = (a_pos.0 as isize - m_pos.0 as isize, a_pos.1 as isize - m_pos.1 as isize);
+                    if matrix[r1 as usize][c1 as usize] == "A"
+                        && matrix[r2 as usize][c2 as usize] == "S"
+                    {
+                        let a_pos = (r1, c1);
+                        // stop if we have been already to avoid dupes
+                        if visited_intersects.contains(&a_pos) {
+                            continue;
+                        }
+                        visited_intersects.push(a_pos);
+                        let m_pos = (row_index, col_index);
+                        let dir = (
+                            a_pos.0 as isize - m_pos.0 as isize,
+                            a_pos.1 as isize - m_pos.1 as isize,
+                        );
                         match dir {
                             (1, 1) => {
-                                if matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize - 1) as usize] == "S"
-                                    && matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize + 1) as usize] == "M"
+                                if matrix[(a_pos.0 as isize + 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "S"
+                                    && matrix[(a_pos.0 as isize - 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "M"
                                 {
                                     word_count += 1;
                                 }
-                                if matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize - 1) as usize] == "M"
-                                    && matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize + 1) as usize] == "S"
+                                if matrix[(a_pos.0 as isize + 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "M"
+                                    && matrix[(a_pos.0 as isize - 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "S"
                                 {
                                     word_count += 1;
                                 }
                             }
                             (1, -1) => {
-                                if matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize - 1) as usize] == "S"
-                                    && matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize + 1) as usize] == "M"
+                                if matrix[(a_pos.0 as isize - 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "S"
+                                    && matrix[(a_pos.0 as isize + 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "M"
                                 {
                                     word_count += 1;
                                 }
-                                if matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize - 1) as usize] == "M"
-                                    && matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize + 1) as usize] == "S"
+                                if matrix[(a_pos.0 as isize - 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "M"
+                                    && matrix[(a_pos.0 as isize + 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "S"
                                 {
                                     word_count += 1;
                                 }
                             }
                             (-1, 1) => {
-                                if matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize - 1) as usize] == "S"
-                                    && matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize + 1) as usize] == "M"
+                                if matrix[(a_pos.0 as isize - 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "S"
+                                    && matrix[(a_pos.0 as isize + 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "M"
                                 {
                                     word_count += 1;
                                 }
-                                if matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize - 1) as usize] == "M"
-                                    && matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize + 1) as usize] == "S"
+                                if matrix[(a_pos.0 as isize - 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "M"
+                                    && matrix[(a_pos.0 as isize + 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "S"
                                 {
                                     word_count += 1;
                                 }
                             }
                             (-1, -1) => {
-                                if matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize - 1) as usize] == "S"
-                                    && matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize + 1) as usize] == "M"
+                                if matrix[(a_pos.0 as isize + 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "S"
+                                    && matrix[(a_pos.0 as isize - 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "M"
                                 {
                                     word_count += 1;
                                 }
-                                if matrix[(a_pos.0 as isize + 1) as usize][(a_pos.1 as isize - 1) as usize] == "M"
-                                    && matrix[(a_pos.0 as isize - 1) as usize][(a_pos.1 as isize + 1) as usize] == "S"
+                                if matrix[(a_pos.0 as isize + 1) as usize]
+                                    [(a_pos.1 as isize - 1) as usize]
+                                    == "M"
+                                    && matrix[(a_pos.0 as isize - 1) as usize]
+                                        [(a_pos.1 as isize + 1) as usize]
+                                        == "S"
                                 {
                                     word_count += 1;
                                 }
                             }
                             _ => {}
                         }
-
-                   }
+                    }
                 }
             }
         }
     }
-    return word_count; 
+    return word_count;
 }
 
 fn in_bounds(row: isize, col: isize, matrix: &[Vec<String>]) -> bool {

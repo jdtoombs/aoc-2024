@@ -1,7 +1,7 @@
-use std::fs;
 use std::cmp;
-use std::iter::Iterator;
+use std::fs;
 use std::iter::zip;
+use std::iter::Iterator;
 
 fn main() {
     print!("Day 1 Part 1: {}\n", day_one_part_one());
@@ -16,7 +16,9 @@ fn day_one_part_one() -> i32 {
     let mut diff: i32 = 0;
 
     for line in file_contents.lines() {
-        let mut numbers = line.split_whitespace().filter_map(|n| n.parse::<i32>().ok());
+        let mut numbers = line
+            .split_whitespace()
+            .filter_map(|n| n.parse::<i32>().ok());
         if let Some(first_number) = numbers.next() {
             left.push(first_number);
         }
@@ -48,7 +50,9 @@ fn day_one_part_two() -> i32 {
     let mut total: i32 = 0;
 
     for line in file_contents.lines() {
-        let mut numbers = line.split_whitespace().filter_map(|n| n.parse::<i32>().ok());
+        let mut numbers = line
+            .split_whitespace()
+            .filter_map(|n| n.parse::<i32>().ok());
         if let Some(first_number) = numbers.next() {
             left.push(first_number);
         }
@@ -58,7 +62,8 @@ fn day_one_part_two() -> i32 {
     }
 
     for l in left.iter() {
-        let multiple: i32 = right.iter().filter(|&&e| e == *l).count() as i32; total += multiple * *l; }
+        let multiple: i32 = right.iter().filter(|&&e| e == *l).count() as i32;
+        total += multiple * *l;
+    }
     return total;
 }
-

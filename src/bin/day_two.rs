@@ -10,7 +10,10 @@ fn day_two() -> i32 {
     let mut safe_count: i32 = 0;
 
     for row in file_contents.lines() {
-        let current_row: Vec<i32> = row.split_whitespace().filter_map(|n| n.parse::<i32>().ok()).collect();
+        let current_row: Vec<i32> = row
+            .split_whitespace()
+            .filter_map(|n| n.parse::<i32>().ok())
+            .collect();
         if process_numbers(current_row) {
             safe_count += 1;
         }
@@ -22,7 +25,7 @@ fn day_two() -> i32 {
 fn is_safe(row: &[i32]) -> bool {
     if row.len() == 1 {
         return true;
-    } 
+    }
 
     let mut increasing = false;
     let mut decreasing = false;
@@ -31,7 +34,7 @@ fn is_safe(row: &[i32]) -> bool {
         let diff = (row[i + 1] - row[i]).abs();
         if diff < 1 || diff > 3 {
             return false;
-        } 
+        }
         if row[i + 1] > row[i] {
             increasing = true;
         } else {

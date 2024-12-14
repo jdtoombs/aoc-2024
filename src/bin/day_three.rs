@@ -1,5 +1,5 @@
-use std::fs;
 use regex::Regex;
+use std::fs;
 
 fn main() {
     println!("Result: {}", day_three());
@@ -13,7 +13,6 @@ fn day_three() -> i32 {
 
     let re = Regex::new(r"mul\((\d+),(\d+)\)|do\(\)|don't\(\)").unwrap();
     for cap in re.captures_iter(&file_contents) {
-
         let can_calc = cap.get(0).unwrap().as_str();
         if can_calc == "do()" {
             calc = true;
@@ -22,13 +21,13 @@ fn day_three() -> i32 {
         }
 
         if let Some(x) = cap.get(1) {
-           if let Some(y) = cap.get(2) {
-               let x = x.as_str().parse::<i32>().unwrap();
-               let y = y.as_str().parse::<i32>().unwrap();
-               if calc {
-                   sum += x * y;
-               } 
-           } 
+            if let Some(y) = cap.get(2) {
+                let x = x.as_str().parse::<i32>().unwrap();
+                let y = y.as_str().parse::<i32>().unwrap();
+                if calc {
+                    sum += x * y;
+                }
+            }
         }
     }
     return sum;
